@@ -58,7 +58,7 @@
     <Compile Include="全国主要流域重点断面水质状况周报.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="国家地表水水质自动监测数据.py">
+    <Compile Include="ChinaSurfaceWateInfo.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="江苏省空气质量与水质环境.py">

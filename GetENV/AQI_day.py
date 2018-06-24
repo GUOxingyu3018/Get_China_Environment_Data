@@ -29,6 +29,7 @@ def get_data(url):
     chrome_browser.close()
     chrome_browser.quit()
     return l_data
+    print(l_data)
 
 if __name__ == '__main__':
 #def save_AQI_day():

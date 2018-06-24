@@ -1,7 +1,7 @@
 from AQI_day import *
 from AQI_hour import *
 from AQI_predict import *
-from 国家地表水水质自动监测数据 import *
+from ChinaSurfaceWateInfo import *
 from 空气吸收剂量率 import *
 import 江苏省空气质量与水质环境
 import time
