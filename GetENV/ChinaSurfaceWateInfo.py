@@ -38,6 +38,7 @@ def get_data(url):
 
 #def save_surfacewater ():
 if __name__ == '__main__':
+    currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
     try:
         url = 'http://123.127.175.45:8082/'   
         surfaceWaterData = get_data(url)
@@ -60,9 +61,10 @@ if __name__ == '__main__':
             sheet.write(lastRow,7,x[7])
             sheet.write(lastRow,8,x[8])
             sheet.write(lastRow,9,x[9])        
-        newBook.save(path)       
+        newBook.save(path)         
+        print(currentTime + 'ChinaSurfaceWateInfo is Downloaded')
     except Exception as e:
-        print('Failed to Dowmload ChinaSurfaceWateInfo' + e)
+        print(currentTime+ 'Failed to Dowmload ChinaSurfaceWateInfo' + e)
 
 '''
     if bool_connect(url) == True: 

@@ -6,6 +6,9 @@ from selenium import webdriver
 import pandas as pd
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
+import xlrd
+import xlwt
+from xlutils.copy  import copy
 
 
 def get_data(url):
@@ -33,17 +36,25 @@ def get_data(url):
 
 if __name__ == '__main__':
 #def save_AQI_day():
-    url = 'http://datacenter.mep.gov.cn/aqiweb2/'
-    if bool_connect(url)  == True:
-        data = get_data(url)
-        name = name = ['城市', 'AQI', '级别','首要污染物']
-        path = r'Data\全国AQI日报\AQI'
-        currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
-        save_excel(colnums = name, data = data, path =path, time = currentTime)
-        print('AQI日报'+ currentTime + '下载成功')
-    else:
-        print('AQI日报网站服务不稳定')
+    currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
+    try:
+        url = 'http://datacenter.mep.gov.cn/aqiweb2/'
+        AQIData = get_data(url)
+        path = r'Data\全国AQI日报\ChinaAQIDailyReport.xls'
+        wb = xlrd.open_workbook(path)
+        newBook = copy(wb)
+        sheetName = 'Sheet1'
+        sheet = newBook.get_sheet(sheetName)
+        
+        for x in AQIData:      
+                lastRow = len(sheet.rows)            
+                sheet.write(lastRow,0,x[0])
+                sheet.write(lastRow,1,x[1])
+                sheet.write(lastRow,2,x[2])
+                sheet.write(lastRow,3,x[3])
+                sheet.write(lastRow,4,currentTime)
+        newBook.save(path)          
+        print(currentTime + 'ChinaAQIDailyReport is Downloaded')
+    except Exception as e:
+        print(currentTime + 'ChinaAQIDailyReport Failed to Download'+ e)
 
-#scheduler = BlockingScheduler()
-#scheduler.add_job(save_AQI_day, 'interval', hours = 6)
-#scheduler.start()
