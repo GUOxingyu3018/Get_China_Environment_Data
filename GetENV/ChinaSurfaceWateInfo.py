@@ -36,8 +36,8 @@ def get_data(url):
     return l_data   
     
 
-#def save_surfacewater ():
-if __name__ == '__main__':
+def save_surfacewater ():
+#if __name__ == '__main__':
     currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
     try:
         url = 'http://123.127.175.45:8082/'   
@@ -66,17 +66,5 @@ if __name__ == '__main__':
     except Exception as e:
         print(currentTime+ 'Failed to Dowmload ChinaSurfaceWateInfo' + e)
 
-'''
-    if bool_connect(url) == True: 
-        data = get_data(url)
-        path = r'Data\国家地表水水质自动监测数据\地表水水质'
-        currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
-        save_excel( data = data, path = path, time = currentTime)
-        print('地表水水质' + currentTime + '下载完成')
-    else:
-        print("地表水水质网络连接出错")
-#scheduler = BlockingScheduler()
-#scheduler.add_job(save_surfacewater, 'interval', hours = 12)
-#scheduler.start()
-'''
+
 

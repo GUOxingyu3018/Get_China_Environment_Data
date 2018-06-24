@@ -4,8 +4,10 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium import webdriver
 import pandas as pd
-from apscheduler.schedulers.blocking import BlockingScheduler
-from datetime import datetime
+import xlrd
+import xlwt
+from xlutils.copy  import copy
+import numpy as np
 
 
 def get_data(url):
@@ -30,23 +32,33 @@ def get_data(url):
     l_data = [l_info[i:i + 46] for i in range(0, len(l_info), 46)]  
     return l_data
 
-#def save_AQI_predict():
-if __name__ == '__main__':
-    try:
-        url = 'http://106.37.208.228:8082/'
+def save_AQI_predict():
+#if __name__ == '__main__':
+    currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
+    url = 'http://106.37.208.228:8082/'
+    try:      
         if bool_connect(url) == True:
-            data = get_data(url)
-            path = r'Data\全国AQI预报24-48-72\AQI预报'
-            currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
-            save_excel(data = data, path= path, time = currentTime)
-            print('AQI预报' + currentTime + '下载完成')
+            AQI_predict_report_data = get_data(url)
+            data_24 = AQI_predict_report_data[0]
+            data_48 = AQI_predict_report_data[1]
+            data_72 = AQI_predict_report_data[2]
+
+            
+            path = r'Data\全国AQI预报24-48-72\AQI_predict_report.xls'
+            wb = xlrd.open_workbook(path)
+            newBook = copy(wb)
+            sheetName = 'Sheet1'
+            sheet = newBook.get_sheet(sheetName)
+            for x in np.array(np.arange(42)):
+                lastRow = len(sheet.rows)
+                sheet.write(lastRow,0,data_24[x])
+                sheet.write(lastRow,1,data_48[x])
+                sheet.write(lastRow,2,data_72[x])
+                sheet.write(lastRow,3,currentTime)
+            newBook.save(path)         
+            print(currentTime + 'AQI_predict_report is Downloaded')         
         else:
             print('AQI预报网站服务不稳定')
     except Exception as e:        
         print(e)
-
-#scheduler = BlockingScheduler()
-#scheduler.add_job(save_AQI_predict, 'interval', hours = 12)
-#scheduler.start()
-
 

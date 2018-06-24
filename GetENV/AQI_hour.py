@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 from CommonFunctions import *
 import pandas as pd
 import time
-from apscheduler.schedulers.blocking import BlockingScheduler
-from datetime import datetime
+import xlrd
+import xlwt
+from xlutils.copy  import copy
 
 
 def get_data(url):
@@ -27,19 +28,33 @@ def get_data(url):
 #存储数据
 def save_AQI_hour():
 #if __name__ == '__main__':
-    url = 'http://datacenter.mep.gov.cn/aqiweb2/' #网站连接不稳定
     currentTime = time.strftime("%Y-%m-%d-%H",time.localtime(time.time()))
-    name = ['城市','AQI','PM2.5','PM10','SO2','NO2','CO','O3','首要污染物']     
-    path = r'Data\全国AQI时报\AQI时报'
-    data = get_data(url)
-    if bool_connect(url) ==True:
-        save_excel(colnums = name,data = data,path = path, currentTime = currentTime)
-        print('AQI时报'+ currentTime + '下载完成')
-    else:
-        print("AQI日报网站服务不稳定")
+    try:
+        url = 'http://datacenter.mep.gov.cn/aqiweb2/'
+        AQI_hour_data = get_data(url)
+        path = r'Data\全国AQI时报\AQI_Hour_Report.xls'
+        wb = xlrd.open_workbook(path)
+        newBook = copy(wb)
+        sheetName = 'Sheet1'
+        sheet = newBook.get_sheet(sheetName)
+        for x in AQI_hour_data:
+            lastRow = len(sheet.rows)
+            sheet.write(lastRow,0,x[0])
+            sheet.write(lastRow,1,x[1])
+            sheet.write(lastRow,2,x[2])
+            sheet.write(lastRow,3,x[3])
+            sheet.write(lastRow,4,x[4])
+            sheet.write(lastRow,5,x[5])
+            sheet.write(lastRow,6,x[6])
+            sheet.write(lastRow,7,x[7])
+            sheet.write(lastRow,8,x[8])
+            sheet.write(lastRow,9,currentTime)
+        newBook.save(path)         
+        print(currentTime + 'AQI_Hour_Report is Downloaded')
+    except Exception as e:
+        print(currentTime+ 'Failed to Dowmload AQI_Hour_Report' + e)
 
-#爬取数据间隔时间设置
-#scheduler = BlockingScheduler()
-#scheduler.add_job(save_AQI_hour, 'interval', hours = 1) # 循环运行间隔时间
-#scheduler.start()
-    
+        
+   
+        
+       
