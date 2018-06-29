@@ -44,7 +44,7 @@ def save_AQI_predict():
             data_72 = AQI_predict_report_data[2]
 
             
-            path = r'Data\全国AQI预报24-48-72\AQI_predict_report.xls'
+            path = r'Data\AQI_predict_report.xls'
             wb = xlrd.open_workbook(path)
             newBook = copy(wb)
             sheetName = 'Sheet1'

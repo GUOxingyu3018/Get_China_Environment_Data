@@ -43,7 +43,7 @@ def save_surfacewater ():
         url = 'http://123.127.175.45:8082/'   
         surfaceWaterData = get_data(url)
 
-        path = r'Data\国家地表水水质自动监测数据\ChinaSurfaceWateInfo.xls'
+        path = r'Data\ChinaSurfaceWateInfo.xls'
         wb = xlrd.open_workbook(path)
         newBook = copy(wb)
         sheetName = 'Sheet1'

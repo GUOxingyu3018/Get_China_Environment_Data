@@ -32,13 +32,13 @@ def get_data(url):
     return l_data
     print(l_data)
 
-#if __name__ == '__main__':
-def save_AQI_day():
+if __name__ == '__main__':
+#def save_AQI_day():
     currentTime = time.strftime("%Y-%m-%d",time.localtime(time.time()))
     try:
         url = 'http://datacenter.mep.gov.cn/aqiweb2/'
         AQIData = get_data(url)
-        path = r'Data\全国AQI日报\ChinaAQIDailyReport.xls'
+        path = r'Data\ChinaAQIDailyReport.xls'
         wb = xlrd.open_workbook(path)
         newBook = copy(wb)
         sheetName = 'Sheet1'

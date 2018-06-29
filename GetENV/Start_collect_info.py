@@ -1,8 +1,8 @@
 from AQI_day import *
+from NationalRadiationEnvironmentalData import *
 from AQI_hour import *
 from AQI_predict import *
 from ChinaSurfaceWateInfo import *
-from 空气吸收剂量率 import *
 import 江苏省空气质量与水质环境
 import time
 import os
@@ -10,9 +10,7 @@ import os
 
 #爬取日报数据
 def save():    
-    save_city_Radiation()
-    time.sleep(100)
-    save_nuclear_Radiation()
+    save__Radiation()
     time.sleep(100)
     save_surfacewater()
     time.sleep(100)    

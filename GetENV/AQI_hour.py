@@ -32,7 +32,7 @@ def save_AQI_hour():
     try:
         url = 'http://datacenter.mep.gov.cn/aqiweb2/'
         AQI_hour_data = get_data(url)
-        path = r'Data\全国AQI时报\AQI_Hour_Report.xls'
+        path = r'Data\AQI_Hour_Report.xls'
         wb = xlrd.open_workbook(path)
         newBook = copy(wb)
         sheetName = 'Sheet1'
