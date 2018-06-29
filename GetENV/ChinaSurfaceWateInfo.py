@@ -4,8 +4,6 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium import webdriver
 import pandas as pd
-from apscheduler.schedulers.blocking import BlockingScheduler
-from datetime import datetime
 import xlrd
 import xlwt
 from xlutils.copy  import copy
