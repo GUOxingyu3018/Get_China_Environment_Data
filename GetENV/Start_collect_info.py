@@ -4,7 +4,7 @@ from AQI_hour import *
 from AQI_predict import *
 from ChinaSurfaceWateInfo import *
 import time
-from apscheduler import *
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 #爬取日报数据
 def save_day():    
@@ -22,19 +22,10 @@ def save_hour():
     time.sleep(180)
 
 
-if __name__ == '__main__':   
+if __name__ == '__main__':
+    scheduler = BlockingScheduler()
+    scheduler.add_job(save_day, 'interval',max_instances = 20, hours = 24) # 循环运行间隔时间   
+    time.sleep(100)
+    scheduler.add_job(save_hour, 'interval',max_instances = 5,minutes = 60)
+    scheduler.start()
     print('开始爬取数据')
-    #爬取数据间隔时间设置
-    try:
-        scheduler = BlockingScheduler()
-        scheduler.add_job(save_day, 'interval',max_instances = 20, hours = 24) # 循环运行间隔时间   
-        time.sleep(10000)
-        scheduler.add_job(save_hour, 'interval',max_instances = 5,minutes = 60)
-        scheduler.start()
-    except Exception as e:
-        pass
-
-
-
-
-
