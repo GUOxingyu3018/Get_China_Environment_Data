@@ -11,7 +11,8 @@ from xlutils.copy  import copy
 def get_data(url):
     l_data = []
     l_info = []
-    html_doc = requests.get(url).text
+    r = requests.get(url)
+    html_doc = r.text
     source = BeautifulSoup(html_doc, 'html.parser')
     #数据提取规则
     #获取全部表格的文本，去除空格符后组成列表

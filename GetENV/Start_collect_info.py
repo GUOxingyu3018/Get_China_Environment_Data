@@ -23,9 +23,10 @@ def save_hour():
 
 
 if __name__ == '__main__':
+    print('开始爬取数据')
     scheduler = BlockingScheduler()
-    scheduler.add_job(save_day, 'interval',max_instances = 20, hours = 24) # 循环运行间隔时间   
+    scheduler.add_job(save_day, 'interval',max_instances = 200, hours = 24) # 循环运行间隔时间   
     time.sleep(100)
     scheduler.add_job(save_hour, 'interval',max_instances = 5,minutes = 60)
     scheduler.start()
-    print('开始爬取数据')
+    
