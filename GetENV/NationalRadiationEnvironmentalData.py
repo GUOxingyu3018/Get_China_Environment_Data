@@ -24,7 +24,7 @@ def get_data(url_city):
     for n in source.find_all('span', class_ = 'label'):      
         value.append(n.text)
 
-#f __name__ == '__main__': 
+#if __name__ == '__main__': 
 def save__Radiation():
     url_city = 'http://data.rmtc.org.cn:8080/gis/listtype0M.html'
     url_nuclear = 'http://data.rmtc.org.cn:8080/gis/listtype1M.html'

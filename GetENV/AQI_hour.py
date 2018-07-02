@@ -30,32 +30,34 @@ def get_data(url):
 def save_AQI_hour():
 #if __name__ == '__main__':
     currentTime = time.strftime("%Y-%m-%d-%H",time.localtime(time.time()))
-    try:
-        url = 'http://datacenter.mep.gov.cn/aqiweb2/'
-        AQI_hour_data = get_data(url)
-        path = r'Data\AQI_Hour_Report.xls'
-        wb = xlrd.open_workbook(path)
-        newBook = copy(wb)
-        sheetName = 'Sheet1'
-        sheet = newBook.get_sheet(sheetName)
-        for x in AQI_hour_data:
-            lastRow = len(sheet.rows)
-            sheet.write(lastRow,0,x[0])
-            sheet.write(lastRow,1,x[1])
-            sheet.write(lastRow,2,x[2])
-            sheet.write(lastRow,3,x[3])
-            sheet.write(lastRow,4,x[4])
-            sheet.write(lastRow,5,x[5])
-            sheet.write(lastRow,6,x[6])
-            sheet.write(lastRow,7,x[7])
-            sheet.write(lastRow,8,x[8])
-            sheet.write(lastRow,9,currentTime)
-        newBook.save(path)         
-        print(currentTime + 'AQI_Hour_Report is Downloaded')
-    except Exception as e:
-        print(currentTime+ 'Failed to Dowmload AQI_Hour_Report' + e)
+    url = 'http://datacenter.mep.gov.cn/aqiweb2/'
+    if bool_connect(url) == True:
+        try:       
+            AQI_hour_data = get_data(url)
+            path = r'Data\AQI_Hour_Report.xls'
+            wb = xlrd.open_workbook(path)
+            newBook = copy(wb)
+            sheetName = 'Sheet1'
+            sheet = newBook.get_sheet(sheetName)
+            for x in AQI_hour_data:
+                lastRow = len(sheet.rows)
+                sheet.write(lastRow,0,x[0])
+                sheet.write(lastRow,1,x[1])
+                sheet.write(lastRow,2,x[2])
+                sheet.write(lastRow,3,x[3])
+                sheet.write(lastRow,4,x[4])
+                sheet.write(lastRow,5,x[5])
+                sheet.write(lastRow,6,x[6])
+                sheet.write(lastRow,7,x[7])
+                sheet.write(lastRow,8,x[8])
+                sheet.write(lastRow,9,currentTime)
+            newBook.save(path)         
+            print(currentTime + 'AQI_Hour_Report is Downloaded')
+        except Exception as e:
+            print(currentTime+ 'Failed to Dowmload AQI_Hour_Report')
+    else:
+        print(currentTime+ 'Failed to Dowmload AQI_Hour_Report')
 
         
    
-        
-       
+      

@@ -54,5 +54,5 @@ def save_AQI_day():
         newBook.save(path)          
         print(currentTime + 'ChinaAQIDailyReport is Downloaded')
     except Exception as e:
-        print(currentTime + 'ChinaAQIDailyReport Failed to Download'+ e)
+        print(currentTime + 'ChinaAQIDailyReport Failed to Download')
 
