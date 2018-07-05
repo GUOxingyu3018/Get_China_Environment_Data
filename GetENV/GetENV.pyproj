@@ -26,18 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Data\江苏省空气和水质数据\" />
-    <Folder Include="Data\全国主要流域重点断面水质状况表\" />
-    <Folder Include="Data\全国空气吸能数据\" />
-    <Folder Include="Data\全国空气吸能数据\核电站\" />
-    <Folder Include="Data\全国空气吸能数据\省会\" />
-    <Folder Include="Data\国家地表水水质自动监测数据\" />
-    <Folder Include="Data\全国AQI预报24-48-72\" />
-    <Folder Include="Data\全国AQI日报\" />
-    <Folder Include="Data\全国AQI时报\" />
-    <Folder Include="Data\江苏省空气和水质数据\AQI时报\" />
-    <Folder Include="Data\江苏省空气和水质数据\AQI日报\" />
-    <Folder Include="Data\江苏省空气和水质数据\水质日报\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AQI_day.py">
@@ -69,6 +57,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\AQI_Hour_Report.xls" />
+    <Content Include="Data\AQI_predict_report.xls" />
+    <Content Include="Data\ChinaAQIDailyReport.xls" />
+    <Content Include="Data\ChinaSurfaceWateInfo.xls" />
+    <Content Include="Data\NationalRadiationEnvironmentalData.xls" />
     <Content Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
